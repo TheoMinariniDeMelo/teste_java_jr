@@ -1,9 +1,5 @@
-package com.coupon.dominio;
+package com.coupon.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,29 +8,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Getter
-@Setter
 public class Coupon {
 
-    @Id
-    @Column(columnDefinition = "CHAR(6)", nullable = false)
     private String code;
-    @Column(nullable = true)
     private String description;
-    @Column(nullable = false)
     private LocalDate expirationDate;
-    @Column(nullable = false)
     private Double discountValue;
-    @Column(nullable = false)
     private LocalDateTime createdAt;
-    @Column(nullable = false)
     private LocalDateTime updatedAt;
-    @Column(nullable = true)
     private LocalDateTime deletedAt;
-    @Column(nullable = false)
     private Boolean isActive;
 
-    public Coupon() {
-    }
     public Coupon(String code, String description, LocalDate expirationDate, Double discountValue, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Boolean isActive) {
         this.code = code;
         this.description = description;

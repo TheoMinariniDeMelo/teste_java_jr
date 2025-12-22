@@ -1,6 +1,6 @@
-package com.coupon.infrastructure.api;
+package com.coupon.infrastructure.web;
 
-import com.coupon.dominio.DomainError;
+import com.coupon.domain.DomainError;
 
 import java.util.List;
 

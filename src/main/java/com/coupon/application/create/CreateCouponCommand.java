@@ -1,4 +1,4 @@
-package com.coupon.application;
+package com.coupon.application.create;
 
 import java.time.LocalDate;
 

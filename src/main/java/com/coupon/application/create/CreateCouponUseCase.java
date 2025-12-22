@@ -1,10 +1,10 @@
-package com.coupon.application;
+package com.coupon.application.create;
 
-import com.coupon.dominio.Coupon;
-import com.coupon.dominio.CouponRepository;
+import com.coupon.application.BusinessException;
+import com.coupon.domain.Coupon;
+import com.coupon.domain.CouponRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service

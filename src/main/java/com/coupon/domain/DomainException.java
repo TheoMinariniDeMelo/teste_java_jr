@@ -1,4 +1,4 @@
-package com.coupon.dominio;
+package com.coupon.domain;
 
 import java.util.List;
 

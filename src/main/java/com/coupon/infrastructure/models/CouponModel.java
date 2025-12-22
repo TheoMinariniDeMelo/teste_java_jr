@@ -1,6 +1,6 @@
 package com.coupon.infrastructure.models;
 
-import com.coupon.dominio.Coupon;
+import com.coupon.domain.Coupon;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,7 +10,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "coupons")
@@ -18,7 +17,7 @@ import java.util.Date;
 @Setter
 public class CouponModel {
     @Id
-    @Column(columnDefinition = "CHAR(6)", nullable = false)
+    @Column(length = 6, nullable = false)
     private String code;
     @Column(nullable = true)
     private String description;
