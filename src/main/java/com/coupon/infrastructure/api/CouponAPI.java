@@ -1,6 +1,6 @@
-package com.coupon.api;
+package com.coupon.infrastructure.api;
 
-import com.coupon.dto.CouponDTO;
+import com.coupon.infrastructure.dto.CouponDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

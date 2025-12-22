@@ -1,8 +1,7 @@
-package com.coupon.dto;
+package com.coupon.infrastructure.dto;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
-import org.h2.api.DatabaseEventListener;
 
 import java.util.Date;
 
