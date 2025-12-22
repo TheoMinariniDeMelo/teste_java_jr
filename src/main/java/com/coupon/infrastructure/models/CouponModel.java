@@ -47,14 +47,16 @@ public class CouponModel {
         this.deletedAt = deletedAt;
         this.isActive = isActive;
     }
-    public CouponModel(Coupon coupon) {
-        this.code = coupon.getCode();
-        this.description = coupon.getDescription();
-        this.expirationDate = coupon.getExpirationDate();
-        this.discountValue = coupon.getDiscountValue();
-        this.createdAt = coupon.getCreatedAt();
-        this.updatedAt = coupon.getUpdatedAt();
-        this.deletedAt = coupon.getDeletedAt();
-        this.isActive = coupon.getIsActive();
+    public static CouponModel fromDomain(Coupon coupon) {
+        return new CouponModel(
+                coupon.getCode(),
+                coupon.getDescription(),
+                coupon.getExpirationDate(),
+                coupon.getDiscountValue(),
+                coupon.getCreatedAt(),
+                coupon.getUpdatedAt(),
+                coupon.getDeletedAt(),
+                coupon.getIsActive()
+        );
     }
 }
