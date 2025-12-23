@@ -23,8 +23,8 @@ public class CreateCouponUseCase {
 
     public Coupon execute(CreateCouponCommand command) {
         log.info("Criando cupom: {}", command.code());
-        if (couponRepository.existsByCode(command.code())) {
-            log.info("Cupom não encontrado {}", command.code());
+        if (couponRepository.existsByCodeAndStatus(command.code(), CouponStatus.ACTIVE)) {
+            log.info("Cupom já existe e está ativo {}", command.code());
             throw new BusinessException("Cupom já existe");
         }
 

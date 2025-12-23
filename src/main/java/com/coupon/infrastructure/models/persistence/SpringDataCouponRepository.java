@@ -24,5 +24,5 @@ public interface SpringDataCouponRepository extends JpaRepository<CouponModel, S
 
     Optional<Coupon> getByIdAndStatus(UUID id, CouponStatus status);
 
-    boolean existsByCode(String code);
+    boolean existsByCodeAndStatus(String code, CouponStatus status);
 }

@@ -23,8 +23,8 @@ public class CouponJpaRepository implements CouponRepository {
     }
 
     @Override
-    public boolean existsByCode(String code) {
-        return repository.existsByCode(code);
+    public boolean existsByCodeAndStatus(String code, CouponStatus status) {
+        return repository.existsByCodeAndStatus(code, status);
     }
 
     @Override
