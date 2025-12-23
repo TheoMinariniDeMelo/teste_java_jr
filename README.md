@@ -1,6 +1,6 @@
 # Coupon API
 
-Uma api para gerenciar cupons de desconto
+Teste técnico para a vaga de desenvolvedor Java.
 
 Tecnologias utilizadas
 - Java 21
@@ -14,20 +14,28 @@ Tecnologias utilizadas
 
 ### 1ª forma: execute com docker
 
-builde a imagem com docker
+1 - build da imagem com docker
 
 ```shell
-  docker build -t cupom-api .
+docker build -t cupom-api .
 ```
-rode o container
+2 - subir o container
 
 ```shell
-  docker run -p 8080:8080 cupom-api
+docker run -p 8080:8080 cupom-api
 ```
 ### 2ª forma: execute com gradle wrapper
 
+1 - certifique de ter o java 21 instalado
+
 ```shell
-    ./gradlew bootRun
+java -version
+```
+
+2 - execute a aplicação com gradlew
+
+```shell
+./gradlew bootRun
 ```
 
 ### Documentação
