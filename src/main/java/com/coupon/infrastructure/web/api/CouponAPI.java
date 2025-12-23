@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.UUID;
 
 @RequestMapping(
-        value = "/coupons",
+        value = "/coupon",
         produces = MediaType.APPLICATION_JSON_VALUE
 )
 public interface CouponAPI {
