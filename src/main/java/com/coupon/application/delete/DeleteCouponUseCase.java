@@ -14,10 +14,9 @@ public class DeleteCouponUseCase {
     }
 
     public void execute(DeleteCouponCommand command) {
-        String code = command.code().replaceAll("[^a-zA-Z0-9]+","");
-        if (couponRepository.existsByCodeAndIsActiveTrue(code)) {
+        if (!couponRepository.existsByCodeAndIsActiveTrue(command.code())) {
             throw new NotFoundException("Cupom não encontrado");
         }
-        couponRepository.deactivate(code);
+        couponRepository.deactivate(command.code());
     }
 }

@@ -1,4 +1,3 @@
 package com.coupon.infrastructure.web;
 
-public class CreateCupounRespnse {
-}
+public record CreateCouponResponse(String code) {}

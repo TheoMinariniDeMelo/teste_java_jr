@@ -4,6 +4,7 @@ import com.coupon.application.create.CreateCouponCommand;
 import com.coupon.application.create.CreateCouponUseCase;
 import com.coupon.application.delete.DeleteCouponCommand;
 import com.coupon.application.delete.DeleteCouponUseCase;
+import com.coupon.infrastructure.web.CreateCouponResponse;
 import com.coupon.infrastructure.web.api.CouponAPI;
 import com.coupon.infrastructure.dto.CouponDTO;
 import com.coupon.infrastructure.models.persistence.CouponJpaRepository;
@@ -29,15 +30,16 @@ public class CouponController implements CouponAPI {
     }
 
     @Override
-    public ResponseEntity<Void> createCoupon(CouponDTO couponDTO) {
+    public ResponseEntity<CreateCouponResponse> createCoupon(CouponDTO couponDTO) {
+        String code = couponDTO.code().replaceAll("[^a-zA-Z0-9]+","");
         var command = new CreateCouponCommand(
-                couponDTO.code(),
+                code,
                 couponDTO.description(),
                 couponDTO.discountValue(),
                 couponDTO.expirationDate()
         );
         createCouponUseCase.execute(command);
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(201).body(new CreateCouponResponse(code));
     }
 
     @Override

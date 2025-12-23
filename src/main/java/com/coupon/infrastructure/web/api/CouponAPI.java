@@ -1,6 +1,7 @@
 package com.coupon.infrastructure.web.api;
 
 import com.coupon.infrastructure.dto.CouponDTO;
+import com.coupon.infrastructure.web.CreateCouponResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
@@ -29,7 +30,7 @@ public interface CouponAPI {
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)
             )
     })
-    ResponseEntity<Void> createCoupon(
+    ResponseEntity<CreateCouponResponse> createCoupon(
             @Valid @RequestBody CouponDTO couponDTO
     );
 

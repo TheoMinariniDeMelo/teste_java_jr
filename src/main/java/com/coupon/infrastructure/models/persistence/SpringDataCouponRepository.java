@@ -17,7 +17,7 @@ public interface SpringDataCouponRepository extends JpaRepository<CouponModel, S
 
     @Modifying
     @Transactional
-    @Query("update CouponModel c set c.isActive = false where c.code = :code AND c.deletedAt = CURRENT_DATE")
+    @Query("update CouponModel c set c.isActive = false, c.updatedAt = CURRENT_TIMESTAMP, c.deletedAt = CURRENT_TIMESTAMP where c.code = :code")
     void deactivate(@Param("code") String code);
 
     Optional<Coupon> findByCode(String code);

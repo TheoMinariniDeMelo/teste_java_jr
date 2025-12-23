@@ -17,7 +17,6 @@ public class CreateCouponUseCase {
     }
 
     public void execute(CreateCouponCommand command) {
-
         if (couponRepository.existsByCode(command.code())) {
             throw new BusinessException("Cupom já existe");
         }
