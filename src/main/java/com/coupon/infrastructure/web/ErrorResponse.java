@@ -1,4 +1,4 @@
 package com.coupon.infrastructure.web;
 
-public record ErrorResponse(String message){
+public record ErrorResponse(String message, String traceId){
 }
