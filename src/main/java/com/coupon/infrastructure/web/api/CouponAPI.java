@@ -1,7 +1,7 @@
 package com.coupon.infrastructure.web.api;
 
 import com.coupon.infrastructure.dto.CouponDTO;
-import com.coupon.infrastructure.web.CreateCouponResponse;
+import com.coupon.infrastructure.web.CouponResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+import java.util.UUID;
 
 @RequestMapping(
         value = "/coupons",
@@ -30,11 +32,11 @@ public interface CouponAPI {
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)
             )
     })
-    ResponseEntity<CreateCouponResponse> createCoupon(
+    ResponseEntity<CouponResponse> createCoupon(
             @Valid @RequestBody CouponDTO couponDTO
     );
 
-    @DeleteMapping("/{code}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Delete a coupon")
     @ApiResponses({
             @ApiResponse(responseCode = "204"),
@@ -48,6 +50,23 @@ public interface CouponAPI {
             )
     })
     ResponseEntity<Void> deleteCoupon(
-            @PathVariable String code
+            @PathVariable UUID id
+    );
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Get a coupon")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(
+                    responseCode = "404",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)
+            )
+    })
+    ResponseEntity<CouponResponse> getCoupon(
+            @PathVariable UUID id
     );
 }

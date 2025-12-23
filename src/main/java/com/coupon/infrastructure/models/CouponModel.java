@@ -1,61 +1,56 @@
 package com.coupon.infrastructure.models;
 
-import com.coupon.domain.Coupon;
+import com.coupon.domain.coupon.Coupon;
+import com.coupon.domain.coupon.CouponStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "coupons")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CouponModel {
     @Id
+    private UUID id;
     @Column(length = 6, nullable = false)
     private String code;
     @Column(nullable = true)
     private String description;
     @Column(nullable = false)
-    private LocalDate expirationDate;
+    private LocalDateTime expirationDate;
     @Column(nullable = false)
     private Double discountValue;
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    @Enumerated(EnumType.ORDINAL)
+    private CouponStatus status;
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
-    @Column(nullable = true)
-    private LocalDateTime deletedAt;
+    private Boolean published;
     @Column(nullable = false)
-    private Boolean isActive;
+    private Boolean redeemed;
 
-    public CouponModel() {
-    }
-    public CouponModel(String code, String description, LocalDate expirationDate, Double discountValue, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Boolean isActive) {
-        this.code = code;
-        this.description = description;
-        this.expirationDate = expirationDate;
-        this.discountValue = discountValue;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
-        this.isActive = isActive;
-    }
     public static CouponModel fromDomain(Coupon coupon) {
         return new CouponModel(
+                coupon.getId(),
                 coupon.getCode(),
                 coupon.getDescription(),
                 coupon.getExpirationDate(),
                 coupon.getDiscountValue(),
-                coupon.getCreatedAt(),
-                coupon.getUpdatedAt(),
-                coupon.getDeletedAt(),
-                coupon.getIsActive()
+                coupon.getStatus(),
+                coupon.getPublished(),
+                coupon.getRedeemed()
         );
     }
 }

@@ -1,6 +1,7 @@
 package com.coupon.infrastructure.models.persistence;
 
-import com.coupon.domain.Coupon;
+import com.coupon.domain.coupon.Coupon;
+import com.coupon.domain.coupon.CouponStatus;
 import com.coupon.infrastructure.models.CouponModel;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,17 +11,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface SpringDataCouponRepository extends JpaRepository<CouponModel, String> {
-    Optional<Coupon> findByCodeAndIsActiveTrue(String code);
-
     @Modifying
     @Transactional
-    @Query("update CouponModel c set c.isActive = false, c.updatedAt = CURRENT_TIMESTAMP, c.deletedAt = CURRENT_TIMESTAMP where c.code = :code")
-    void deactivate(@Param("code") String code);
+    @Query("update CouponModel c set c.status = 2 where c.id = :id")
+    void deactivate(@Param("id") UUID id);
 
-    Optional<Coupon> findByCode(String code);
+    boolean existsByIdAndStatus(UUID id, CouponStatus status);
 
-    boolean existsByCodeAndIsActiveTrue(String code);
+    Optional<Coupon> getByIdAndStatus(UUID id, CouponStatus status);
+
+    boolean existsByCode(String code);
 }

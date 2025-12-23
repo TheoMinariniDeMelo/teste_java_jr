@@ -1,40 +1,42 @@
-package com.coupon.domain;
+package com.coupon.domain.coupon;
 
+import com.coupon.domain.DomainError;
+import com.coupon.domain.DomainException;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Getter
 public class Coupon {
-
+    private UUID id;
     private String code;
     private String description;
-    private LocalDate expirationDate;
+    private LocalDateTime expirationDate;
     private Double discountValue;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private LocalDateTime deletedAt;
-    private Boolean isActive;
+    private CouponStatus status;
+    private Boolean published;
+    private Boolean redeemed;
 
-    public Coupon(String code, String description, LocalDate expirationDate, Double discountValue, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Boolean isActive) {
+    public Coupon(UUID id, String code, String description, LocalDateTime expirationDate, Double discountValue, CouponStatus status, Boolean published, Boolean redeemed) {
+        this.id = id;
         this.code = code;
         this.description = description;
         this.expirationDate = expirationDate;
         this.discountValue = discountValue;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
-        this.isActive = isActive;
+        this.status = status;
+        this.published = published;
+        this.redeemed = redeemed;
     }
     public void validation(){
         ArrayList<DomainError> errors = new ArrayList<>();
         if(code.length() != 6){
             errors.add(new DomainError("code","Deve ter exatamente 6 caracteres"));
         }
-        if(expirationDate.isBefore(LocalDate.now())){
+        if(expirationDate.isBefore(LocalDateTime.now())){
             errors.add(new DomainError("expirationDate", "Deve ser maior que a data atual"));
         }
         if(discountValue < 0.5){

@@ -1,5 +1,7 @@
 package com.coupon.application.delete;
 
+import java.util.UUID;
+
 public record DeleteCouponCommand(
-        String code
+        UUID id
 ) {}

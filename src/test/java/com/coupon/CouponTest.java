@@ -1,6 +1,6 @@
 package com.coupon;
 
-import com.coupon.domain.Coupon;
+import com.coupon.domain.coupon.Coupon;
 import com.coupon.domain.DomainException;
 import org.junit.jupiter.api.Test;
 

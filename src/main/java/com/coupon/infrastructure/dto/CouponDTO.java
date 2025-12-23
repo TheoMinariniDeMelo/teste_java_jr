@@ -3,8 +3,7 @@ package com.coupon.infrastructure.dto;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public record CouponDTO (
         @NotBlank
@@ -14,5 +13,8 @@ public record CouponDTO (
         @NotBlank
         Double discountValue,
         @FutureOrPresent
-        LocalDate expirationDate){
+        LocalDateTime expirationDate,
+        @NotBlank
+        Boolean published
+){
 }

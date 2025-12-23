@@ -1,13 +1,14 @@
 package com.coupon.application.create;
 
 import com.coupon.application.BusinessException;
-import com.coupon.domain.Coupon;
-import com.coupon.domain.CouponRepository;
+import com.coupon.domain.coupon.Coupon;
+import com.coupon.domain.coupon.CouponRepository;
+import com.coupon.domain.coupon.CouponStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class CreateCouponUseCase {
@@ -20,7 +21,7 @@ public class CreateCouponUseCase {
         this.couponRepository = couponRepository;
     }
 
-    public void execute(CreateCouponCommand command) {
+    public Coupon execute(CreateCouponCommand command) {
         log.info("Criando cupom: {}", command.code());
         if (couponRepository.existsByCode(command.code())) {
             log.info("Cupom não encontrado {}", command.code());
@@ -28,18 +29,19 @@ public class CreateCouponUseCase {
         }
 
         Coupon coupon = new Coupon(
+                UUID.randomUUID(),
                 command.code(),
                 command.description(),
                 command.expirationDate(),
                 command.discountValue(),
-                LocalDateTime.now(),
-                LocalDateTime.now(),
-                null,
-                true
+                CouponStatus.ACTIVE,
+                command.published(),
+                false
         );
         coupon.validation();
 
         couponRepository.save(coupon);
         log.info("Cupom criado com sucesso {}", command.code());
+        return coupon;
     }
 }

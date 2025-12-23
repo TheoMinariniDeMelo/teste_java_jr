@@ -1,11 +1,13 @@
 package com.coupon.infrastructure.models.persistence;
 
-import com.coupon.domain.Coupon;
-import com.coupon.domain.CouponRepository;
+import com.coupon.domain.coupon.Coupon;
+import com.coupon.domain.coupon.CouponRepository;
+import com.coupon.domain.coupon.CouponStatus;
 import com.coupon.infrastructure.models.CouponModel;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class CouponJpaRepository implements CouponRepository {
@@ -16,32 +18,27 @@ public class CouponJpaRepository implements CouponRepository {
     }
 
     @Override
-    public Optional<Coupon> findByCodeAndIsActiveTrue(String code) {
-        return repository.findByCodeAndIsActiveTrue(code);
-    }
-
-    @Override
-    public void deactivate(String code) {
-        repository.deactivate(code);
-    }
-
-    @Override
-    public Optional<Coupon> findByCode(String code) {
-        return repository.findByCode(code);
+    public void deactivate(UUID id) {
+        repository.deactivate(id);
     }
 
     @Override
     public boolean existsByCode(String code) {
-        return repository.existsById(code);
+        return repository.existsByCode(code);
     }
 
     @Override
-    public boolean existsByCodeAndIsActiveTrue(String code) {
-        return repository.existsByCodeAndIsActiveTrue(code);
+    public boolean existsByIdAndStatus(UUID id, CouponStatus status){
+        return repository.existsByIdAndStatus(id, status);
+    }
+    @Override
+    public Optional<Coupon> getByIdAndStatus(UUID id, CouponStatus status){
+        return repository.getByIdAndStatus(id, status);
     }
 
     @Override
     public void save(Coupon coupon) {
         repository.save(CouponModel.fromDomain(coupon));
     }
+
 }
